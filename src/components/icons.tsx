@@ -38,22 +38,6 @@ export function MailIcon({ className }: IconProps) {
   );
 }
 
-export function FileIcon({ className }: IconProps) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth={1.6}
-      className={className}
-      aria-hidden="true"
-    >
-      <path d="M6.5 2.75h8l4 4v13a1 1 0 0 1-1 1h-11a1 1 0 0 1-1-1V3.75a1 1 0 0 1 1-1Z" />
-      <path d="M14 2.75v4.5h4.5" />
-    </svg>
-  );
-}
-
 export function ExternalLinkIcon({ className }: IconProps) {
   return (
     <svg

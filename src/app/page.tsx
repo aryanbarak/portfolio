@@ -9,7 +9,7 @@ import { siteConfig } from "@/data/site-config";
 
 export default function Home() {
   return (
-    <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:flex lg:items-start lg:gap-16 lg:px-16">
+    <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:flex lg:items-start lg:gap-16 lg:pl-8 lg:pr-16">
       <Sidebar />
 
       <main className="lg:min-w-0 lg:flex-1 lg:pt-8 lg:pb-16">
@@ -70,7 +70,14 @@ export default function Home() {
           inside Contact's own box.
         */}
         <div className="min-h-screen">
-          <section id="contact" className="pt-8">
+          {/*
+            Contact has no nav entry, so this extra top padding (larger than
+            the pt-8 every other section uses) is purely editorial breathing
+            room after Skills — it doesn't interact with the anchor-scroll
+            fix above, since nothing ever scrolls to #contact via the
+            scrollspy.
+          */}
+          <section id="contact" className="pt-14 lg:pt-16">
             <SectionHeading index="05" title="Contact" />
             <p className="max-w-md text-muted">{siteConfig.contact.heading}</p>
             {siteConfig.email ? (
@@ -81,7 +88,7 @@ export default function Home() {
                 {siteConfig.email}
               </a>
             ) : null}
-            <div className="mt-6">
+            <div className="mt-8">
               <SocialLinks />
             </div>
           </section>

@@ -42,6 +42,17 @@ export type SkillGroup = {
 // Override with NEXT_PUBLIC_SITE_URL at build/deploy time once it is known.
 export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://barakzai.cloud";
 
+// Placeholder value for siteConfig.linkedinUrl until the real profile URL is
+// supplied. isRealUrl() below treats anything that isn't an http(s) URL —
+// including this placeholder — as "not configured", so consumers hide the
+// LinkedIn link rather than rendering a broken href. Replace the config
+// value with the real URL and it renders automatically, no other changes.
+export const LINKEDIN_URL_PLACEHOLDER = "[PASTE_EXACT_LINKEDIN_URL_HERE]";
+
+export function isRealUrl(value: string | null): value is string {
+  return value !== null && /^https?:\/\//i.test(value);
+}
+
 export const siteConfig = {
   name: "Aryan Barakzai",
   role: "Software Developer",
@@ -52,13 +63,10 @@ export const siteConfig = {
   // All external URLs live here as `string | null`. Consumers must not
   // render a link when the value is null.
   githubUrl: "https://github.com/aryanbarak" as string | null,
-  // TODO: add the real LinkedIn profile URL once available. Do not invent one —
-  // leave null so consumers hide the icon until it is set.
-  linkedinUrl: null as string | null,
-  // The PDF doesn't exist in /public yet. Keep the intended path here and
-  // flip resumeEnabled to true once the file is added, rather than
-  // deleting/re-adding the URL.
-  resumeUrl: "/cv-aryan-barakzai.pdf" as string | null,
+  // TODO: replace with the real LinkedIn profile URL once available. Do not
+  // invent one — see LINKEDIN_URL_PLACEHOLDER / isRealUrl() above; consumers
+  // hide the LinkedIn link until this is a real https:// URL.
+  linkedinUrl: "https://www.linkedin.com/in/aryan-barakzai",  resumeUrl: "/cv-aryan-barakzai.pdf" as string | null,
   resumeEnabled: true,
 
   nav: [
