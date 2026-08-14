@@ -1,67 +1,92 @@
-import Image from "next/image";
+import { ExperienceItem } from "@/components/ExperienceItem";
+import { Footer } from "@/components/Footer";
+import { ProjectRow } from "@/components/ProjectRow";
+import { SectionHeading } from "@/components/SectionHeading";
+import { Sidebar } from "@/components/Sidebar";
+import { SkillGroup } from "@/components/SkillGroup";
+import { SocialLinks } from "@/components/SocialLinks";
+import { siteConfig } from "@/data/site-config";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+    <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:flex lg:items-start lg:gap-16 lg:px-16">
+      <Sidebar />
+
+      <main className="lg:min-w-0 lg:flex-1 lg:pt-8 lg:pb-16">
+        {/*
+          Sections intentionally carry no scroll-margin-top. There's no fixed
+          header to reserve space for, and sections sit flush against each
+          other (no bottom padding/margin) — so any positive scroll-margin
+          just re-exposes that many pixels of the previous section's tail
+          once you land on the anchor. pt-8 alone gives breathing room, and
+          it's safely inside the new section's own box, not borrowed from
+          the one before it.
+        */}
+        <section id="about" className="pt-8">
+          <SectionHeading index="01" title="About" />
+          <div className="max-w-2xl space-y-4 text-muted">
+            {siteConfig.about.map((paragraph) => (
+              <p key={paragraph}>{paragraph}</p>
+            ))}
+          </div>
+        </section>
+
+        <section id="projects" className="pt-8">
+          <SectionHeading index="02" title="Projects" />
+          <ul>
+            {siteConfig.projects.map((project) => (
+              <ProjectRow key={project.id} project={project} />
+            ))}
+          </ul>
+        </section>
+
+        <section id="experience" className="pt-8">
+          <SectionHeading index="03" title="Experience" />
+          <ul>
+            {siteConfig.experience.map((entry) => (
+              <ExperienceItem key={`${entry.period}-${entry.title}`} entry={entry} />
+            ))}
+          </ul>
+        </section>
+
+        <section id="skills" className="pt-8">
+          <SectionHeading index="04" title="Skills" />
+          <div className="grid gap-8 sm:grid-cols-2">
+            {siteConfig.skills.map((group) => (
+              <SkillGroup key={group.label} group={group} />
+            ))}
+          </div>
+        </section>
+
+        {/*
+          Contact is the last section, and the remaining content below it
+          (just this section + the footer) is shorter than a typical
+          viewport — without this, the page can't scroll far enough for
+          Contact to land near the top when navigated to. min-h-screen
+          guarantees enough scroll runway at any viewport height (the
+          shortfall scales 1:1 with viewport height, so anything less than
+          100vh would eventually fall short again on a taller screen);
+          block layout puts the resulting slack after the footer, not
+          inside Contact's own box.
+        */}
+        <div className="min-h-screen">
+          <section id="contact" className="pt-8">
+            <SectionHeading index="05" title="Contact" />
+            <p className="max-w-md text-muted">{siteConfig.contact.heading}</p>
+            {siteConfig.email ? (
+              <a
+                href={`mailto:${siteConfig.email}`}
+                className="focus-ring mt-4 inline-block font-mono text-sm text-accent underline decoration-accent/40 underline-offset-4 transition-colors hover:decoration-accent"
+              >
+                {siteConfig.email}
+              </a>
+            ) : null}
+            <div className="mt-6">
+              <SocialLinks />
+            </div>
+          </section>
+
+          <Footer />
         </div>
       </main>
     </div>
