@@ -1,8 +1,6 @@
+import Link from "next/link";
 import { siteConfig } from "@/data/site-config";
 
-// The /impressum route exists but is not linked here: its legal content
-// (name/address/contact) is still TODO, so it must not be promoted as a
-// finished page. Re-add a link once that content is filled in.
 export function Footer() {
   const year = new Date().getFullYear();
 
@@ -11,6 +9,9 @@ export function Footer() {
       <p>
         © {year} {siteConfig.name}
       </p>
+      <Link href="/impressum" className="focus-ring mt-2 inline-block hover:text-muted">
+        Impressum
+      </Link>
     </footer>
   );
 }
