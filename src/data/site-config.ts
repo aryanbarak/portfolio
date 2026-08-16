@@ -90,11 +90,10 @@ export const siteConfig = {
       description:
         "An AI-powered project operating system for software development, project intelligence and secure, auditable AI-assisted actions.",
       tech: ["React", "TypeScript", "Supabase", "Cloudflare Workers", "AI Integration"],
-      githubUrl: "https://github.com/aryanbarak/smartflow",
-      // Intended final URL. Domain is not confirmed live yet — set
-      // liveEnabled to true once https://flow.barakzai.cloud actually resolves.
-      liveUrl: "https://flow.barakzai.cloud",
-      liveEnabled: false,
+      // Source repository is private; no public GitHub link is shown.
+      githubUrl: null,
+      liveUrl: "https://smartaryn.com",
+      liveEnabled: true,
       screenshotUrl: null,
     },
     {
@@ -104,7 +103,8 @@ export const siteConfig = {
       description:
         "A multilingual learning platform for Fachinformatiker Anwendungsentwicklung with structured lessons, quizzes, flashcards, algorithm visualizations, contextual AI assistance, PWA support and Android packaging.",
       tech: ["React", "TypeScript", "Google Gemini", "PWA", "Capacitor"],
-      githubUrl: "https://github.com/aryanbarak/smart-academy",
+      // Source repository is private; no public GitHub link is shown.
+      githubUrl: null,
       liveUrl: "https://academy.barakzai.cloud",
       liveEnabled: true,
       screenshotUrl: null,
@@ -116,11 +116,10 @@ export const siteConfig = {
       description:
         "An AI-assisted automation and content workspace focused on intelligent workflows, integrations and multi-channel content production.",
       tech: ["Next.js", "TypeScript", "Supabase", "AI Integration", "Automation"],
-      githubUrl: "https://github.com/aryanbarak/ai-automation-agent",
-      // Intended final URL. Domain is not confirmed live yet — set
-      // liveEnabled to true once https://automation.barakzai.cloud actually resolves.
+      // Source repository is private; no public GitHub link is shown.
+      githubUrl: null,
       liveUrl: "https://automation.barakzai.cloud",
-      liveEnabled: false,
+      liveEnabled: true,
       screenshotUrl: null,
     },
   ] satisfies Project[],
